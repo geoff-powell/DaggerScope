@@ -10,5 +10,12 @@ class ActivityModule {
     @Provides
     fun provideActivityDependency(): ActivityDependency = ActivityDependency()
 
-    class ActivityDependency : Dependency()
+    class ActivityDependency {
+
+        val count: Int = instance++
+
+        companion object {
+            var instance = 0
+        }
+    }
 }

@@ -12,7 +12,6 @@ import com.greenmist.android.daggerscope.di.ChildFragmentModule
 import com.greenmist.android.daggerscope.di.FragmentModule
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_child.*
-import kotlinx.android.synthetic.main.fragment_dialog.*
 import javax.inject.Inject
 
 class ChildFragment : DaggerFragment() {

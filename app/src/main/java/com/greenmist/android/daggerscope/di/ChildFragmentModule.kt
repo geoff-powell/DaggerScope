@@ -10,5 +10,12 @@ class ChildFragmentModule {
     @Provides
     fun provideFragmentDependency(): ChildFragmentDependency = ChildFragmentDependency()
 
-    class ChildFragmentDependency : Dependency()
+    class ChildFragmentDependency {
+
+        val count: Int = instance++
+
+        companion object {
+            var instance = 0
+        }
+    }
 }
