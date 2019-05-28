@@ -14,5 +14,12 @@ class ScreenModule {
         return CategoryFilter()
     }
 
-    class CategoryFilter : Dependency()
+    class CategoryFilter {
+
+        val count: Int = instance++
+
+        companion object {
+            var instance = 0
+        }
+    }
 }
