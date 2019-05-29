@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import com.greenmist.android.daggerscope.di.ActivityModule
 import com.greenmist.android.daggerscope.di.AppModule
 import com.greenmist.android.daggerscope.di.FragmentModule
-import com.greenmist.android.daggerscope.di.ScreenModule
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_nav.*
 import javax.inject.Inject
@@ -18,9 +17,6 @@ class NavFragment : DaggerFragment() {
     
     @Inject
     lateinit var app: App
-//
-//    @Inject
-//    lateinit var categoryFilter: ScreenModule.CategoryFilter
 
     @Inject
     lateinit var singletonManager: AppModule.SingletonManager

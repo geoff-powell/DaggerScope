@@ -17,6 +17,8 @@ class MainActivity : DaggerAppCompatActivity() {
     @Inject
     lateinit var singletonManager: AppModule.SingletonManager
 
+    private var state: Boolean = false
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +29,20 @@ class MainActivity : DaggerAppCompatActivity() {
 
         text_activity.text = "Singleton: ${singletonManager.type} - Activity: ${activityDependency.count}"
 
+        switchFragment()
+
+        button.setOnClickListener {
+            switchFragment()
+        }
+    }
+
+    private fun switchFragment() {
+        state = !state
+
+        val fragment = if (state) NavFragment() else OtherNavFragment()
+
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container, NavFragment())
+            .replace(R.id.container, fragment)
             .commitNowAllowingStateLoss()
     }
 }

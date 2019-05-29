@@ -6,16 +6,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.greenmist.android.daggerscope.di.*
+import com.greenmist.android.daggerscope.di.ActivityModule
+import com.greenmist.android.daggerscope.di.AppModule
+import com.greenmist.android.daggerscope.di.ChildFragmentModule
+import com.greenmist.android.daggerscope.di.FragmentModule
 import dagger.android.support.DaggerDialogFragment
 import kotlinx.android.synthetic.main.fragment_dialog.*
-import kotlinx.android.synthetic.main.fragment_nav.*
 import javax.inject.Inject
 
 class DialogFragment : DaggerDialogFragment() {
-
-//    @Inject
-//    lateinit var categoryFilter: ScreenModule.CategoryFilter
 
     @Inject
     lateinit var singletonManager: AppModule.SingletonManager

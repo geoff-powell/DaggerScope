@@ -3,7 +3,7 @@ package com.greenmist.android.daggerscope.di
 import dagger.Module
 import dagger.Provides
 
-@Module(includes = [ChildFragmentBuildersModule::class])
+@Module
 class FragmentModule {
 
     @FragmentScope

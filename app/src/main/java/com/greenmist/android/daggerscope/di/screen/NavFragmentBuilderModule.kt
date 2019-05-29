@@ -1,21 +1,22 @@
-package com.greenmist.android.daggerscope.di
+package com.greenmist.android.daggerscope.di.screen
 
 import com.greenmist.android.daggerscope.NavFragment
+import com.greenmist.android.daggerscope.di.FragmentModule
+import com.greenmist.android.daggerscope.di.FragmentScope
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class FragmentBuildersModule {
+abstract class NavFragmentBuilderModule {
 
-    @ScreenScope
     @FragmentScope
     @ContributesAndroidInjector(
         modules = [
             FragmentModule::class,
-            ScreenModule::class
+            ChildFragmentBuilderModule::class,
+            DialogFragmentBuilderModule::class
         ]
     )
-    /* modules to install into the subcomponent */
     abstract fun contributeNavFragmentInjector(): NavFragment
 
 }
