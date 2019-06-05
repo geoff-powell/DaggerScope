@@ -3,7 +3,9 @@ package com.greenmist.android.daggerscope.di
 import dagger.Module
 import dagger.Provides
 
-@Module
+@Module(includes = [
+    FragmentViewModelModule::class
+])
 class FragmentModule {
 
     @FragmentScope

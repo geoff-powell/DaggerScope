@@ -7,7 +7,7 @@ import dagger.Provides
 import javax.inject.Singleton
 import kotlin.random.Random
 
-@Module
+@Module(includes = [ViewModelModule::class])
 class AppModule {
 
     @Provides

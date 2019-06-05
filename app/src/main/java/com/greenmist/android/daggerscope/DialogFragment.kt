@@ -6,10 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.greenmist.android.daggerscope.di.ActivityModule
-import com.greenmist.android.daggerscope.di.AppModule
-import com.greenmist.android.daggerscope.di.ChildFragmentModule
-import com.greenmist.android.daggerscope.di.FragmentModule
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.greenmist.android.daggerscope.di.*
+import com.greenmist.android.daggerscope.vm.FragmentViewModel
 import dagger.android.support.DaggerDialogFragment
 import kotlinx.android.synthetic.main.fragment_dialog.*
 import javax.inject.Inject
@@ -28,6 +28,11 @@ class DialogFragment : DaggerDialogFragment() {
     @Inject
     lateinit var childFragmentDependency: ChildFragmentModule.ChildFragmentDependency
 
+    @Inject
+    lateinit var fragmentDaggerViewModelFactory: FragmentDaggerViewModelFactory
+
+    private lateinit var viewModel: FragmentViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_dialog, container, false)
     }
@@ -41,7 +46,13 @@ class DialogFragment : DaggerDialogFragment() {
         Log.d(javaClass.simpleName, "TAG Fragment: ${fragmentDependency.count}")
         Log.d(javaClass.simpleName, "TAG Child Fragment: ${childFragmentDependency.count}")
 
-        text_dialog.text = "Singleton: ${singletonManager.type}\nActivity: ${activityDependency.count}\nFragment: ${fragmentDependency.count}\nChild Fragment: ${childFragmentDependency.count}"
+        viewModel = ViewModelProviders.of(this, fragmentDaggerViewModelFactory).get(FragmentViewModel::class.java)
+        viewModel.data.observe(viewLifecycleOwner, Observer {
+            Log.e(javaClass.simpleName, "TAG VM: $it")
+        })
+
+        text_dialog.text =
+            "Singleton: ${singletonManager.type}\nActivity: ${activityDependency.count}\nFragment: ${fragmentDependency.count}\nChild Fragment: ${childFragmentDependency.count}"
 
         childFragmentManager.beginTransaction()
             .replace(R.id.child_fragment, ChildFragment())
